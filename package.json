@@ -1,0 +1,19 @@
+{
+  "name": "digifit-india",
+  "version": "1.0.0",
+  "description": "dfi website",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nitin7dc/digifit-india.git"
+  },
+  "author": "nitin7dc@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nitin7dc/digifit-india/issues"
+  },
+  "homepage": "https://github.com/nitin7dc/digifit-india#readme"
+}
