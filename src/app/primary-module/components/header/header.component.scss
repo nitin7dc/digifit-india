@@ -1,0 +1,72 @@
+@import "../../../../style.media-queries";
+
+.header-container {
+  //border-bottom: 2px solid var(--app-border-color);
+  height: 60px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--app-theme-color);
+
+  .header-content {
+
+    width: 100%;
+    max-width: var(--app-max-width);
+    margin: 0 auto;
+    padding: 0 16px;
+    //color: var(--app-text-color-2);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .title {
+      margin-right: 24px !important;
+      color: var(--app-text-color);
+      font-weight: 500;
+      font-size: x-large;
+      flex-grow: 1;
+    }
+
+    .menu-items {
+
+      display: flex;
+      flex-direction: row;
+
+      a {
+        //color: var(--app-title-text-color);
+        text-decoration: none;
+        font-weight: 500;
+        font-size: medium;
+        display: flex;
+        margin-right: 16px;
+        border-bottom: 3px solid transparent;
+        cursor: pointer;
+        padding: 8px 20px;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      .logged-in {
+        background: black;
+        color: white;
+        border-radius: 24px;
+        opacity: 1;
+      }
+
+    }
+
+    //.logged-in {
+    //  padding: 4px 12px;
+    //  background: var(--app-primary-color);
+    //  color: var(--app-text-color);
+    //  border-radius: 12px;
+    //  font-size: 12px;
+    //}
+
+  }
+
+}

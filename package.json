@@ -1,19 +1,48 @@
 {
-  "name": "digifit-india",
-  "version": "1.0.0",
-  "description": "dfi website",
-  "main": "index.js",
+  "name": "digifitindia-website",
+  "version": "0.0.1",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test",
+    "prepare": "husky install"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/nitin7dc/digifit-india.git"
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "^16.2.0",
+    "@angular/cdk": "^16.2.12",
+    "@angular/common": "^16.2.0",
+    "@angular/compiler": "^16.2.0",
+    "@angular/core": "^16.2.0",
+    "@angular/flex-layout": "^15.0.0-beta.42",
+    "@angular/forms": "^16.2.0",
+    "@angular/material": "^16.2.12",
+    "@angular/platform-browser": "^16.2.0",
+    "@angular/platform-browser-dynamic": "^16.2.0",
+    "@angular/router": "^16.2.0",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0",
+    "zone.js": "~0.13.0"
   },
-  "author": "nitin7dc@gmail.com",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/nitin7dc/digifit-india/issues"
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^16.2.9",
+    "@angular/cli": "^16.2.9",
+    "@angular/compiler-cli": "^16.2.0",
+    "@types/jasmine": "~4.3.0",
+    "husky": "^9.0.10",
+    "jasmine-core": "~4.6.0",
+    "karma": "~6.4.0",
+    "karma-chrome-launcher": "~3.2.0",
+    "karma-coverage": "~2.2.0",
+    "karma-jasmine": "~5.1.0",
+    "karma-jasmine-html-reporter": "~2.1.0",
+    "lint-staged": "^15.2.1",
+    "prettier": "3.2.5",
+    "typescript": "~5.1.3"
   },
-  "homepage": "https://github.com/nitin7dc/digifit-india#readme"
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
+  }
 }
