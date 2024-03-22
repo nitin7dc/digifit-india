@@ -1,0 +1,1 @@
+{"ast":null,"code":"export * from './home/home.component';\nexport * from './footer/footer.component';\nexport * from './header/header.component';","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}
