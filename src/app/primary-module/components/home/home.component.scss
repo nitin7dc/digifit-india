@@ -19,6 +19,10 @@
       max-width: var(--app-max-width);
       margin: 0 auto;
 
+      .connect {
+          background-color: var(--app-theme-color);
+          margin-top: 20px;
+        }
       //border: 1px solid red;
       @include layout-bp(xs) {
         padding: 0 16px;
