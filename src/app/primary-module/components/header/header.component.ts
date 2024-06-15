@@ -30,6 +30,6 @@ export class HeaderComponent {
   }
 
   openWebPage() {
-    window.open("https://digifitindia.com", "_blank");
+    window.open("https://medium.com/digifitindia", "_blank");
   }
 }
