@@ -7,15 +7,20 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {HomeComponent} from './primary-module/components';
+import { BmrCalculatorComponent } from "./primary-module/components/bmr-calculator/bmr-calculator.component";
 
 const routes: Routes = [
   {
-    path: 'home',
+    path: "home",
     component: HomeComponent,
   },
   {
-    path: '**',
-    redirectTo: 'home',
+    path: "bmr-calculator",
+    component: BmrCalculatorComponent,
+  },
+  {
+    path: "**",
+    redirectTo: "home",
   },
 ];
 
