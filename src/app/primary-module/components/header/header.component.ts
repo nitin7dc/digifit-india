@@ -1,14 +1,4 @@
-import {
-  Component,
-  OnDestroy,
-  ViewChild,
-  OnInit,
-  Output,
-  EventEmitter,
-  Input,
-} from '@angular/core';
-import { CalculatorDialogComponent } from '../../calculator-dialog/calculator-dialog.component';
-import { MatDialog } from '@angular/material/dialog';
+import { Component } from '@angular/core';
 
 @Component({
   selector: "app-header",
@@ -16,20 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ["./header.component.scss"],
 })
 export class HeaderComponent {
-  constructor(public dialog: MatDialog) {}
-
-  openCalculator(): void {
-    const dialogRef = this.dialog.open(CalculatorDialogComponent, {
-      width: "550px",
-      height: "650px",
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log("The calculator dialog was closed");
-    });
-  }
-
-  openWebPage() {
+  openWebPage(): void {
     window.open("https://medium.com/digifitindia", "_blank");
   }
 }
