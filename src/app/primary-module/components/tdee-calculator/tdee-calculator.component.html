@@ -1,0 +1,181 @@
+<div class="tdee-container">
+  <div class="calculator-header">
+    <h2>Total Daily Energy Expenditure (TDEE) Calculator</h2>
+    <p class="subtitle">
+      Find out how much energy your body needs each day based on your routine and goals. Enter your details to receive personalised calorie targets.
+    </p>
+  </div>
+
+  <div class="calculator-content">
+    <div class="form-section">
+      <form [formGroup]="calculatorForm" (ngSubmit)="calculate()">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="age">Age *</label>
+            <input
+              id="age"
+              type="number"
+              formControlName="age"
+              placeholder="Enter your age"
+              class="form-control"
+              [class.error]="calculatorForm.get('age')?.invalid && calculatorForm.get('age')?.touched"
+            />
+            <div class="error-message" *ngIf="calculatorForm.get('age')?.invalid && calculatorForm.get('age')?.touched">
+              {{ getErrorMessage('age') }}
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="sex">Gender *</label>
+            <select
+              id="sex"
+              formControlName="sex"
+              class="form-control"
+            >
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="height">Height (cm) *</label>
+            <input
+              id="height"
+              type="number"
+              formControlName="height"
+              placeholder="Enter height in cm"
+              class="form-control"
+              [class.error]="calculatorForm.get('height')?.invalid && calculatorForm.get('height')?.touched"
+            />
+            <div class="error-message" *ngIf="calculatorForm.get('height')?.invalid && calculatorForm.get('height')?.touched">
+              {{ getErrorMessage('height') }}
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="weight">Weight (kg) *</label>
+            <input
+              id="weight"
+              type="number"
+              formControlName="weight"
+              placeholder="Enter weight in kg"
+              class="form-control"
+              [class.error]="calculatorForm.get('weight')?.invalid && calculatorForm.get('weight')?.touched"
+            />
+            <div class="error-message" *ngIf="calculatorForm.get('weight')?.invalid && calculatorForm.get('weight')?.touched">
+              {{ getErrorMessage('weight') }}
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group full-width">
+            <label for="activityLevel">Activity Level *</label>
+            <select
+              id="activityLevel"
+              formControlName="activityLevel"
+              class="form-control"
+            >
+              <option *ngFor="let level of activityLevels" [ngValue]="level.value">
+                {{ level.label }} ({{ level.description }})
+              </option>
+            </select>
+            <div class="helper-text">
+              Choose the option that best represents your average weekly routine.
+            </div>
+          </div>
+        </div>
+
+        <div class="button-group">
+          <button type="submit" class="btn-primary">Calculate TDEE</button>
+          <button type="button" class="btn-reset" (click)="resetForm()">Reset</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="result-section" *ngIf="showResults && bmr !== null && tdee !== null">
+      <div class="result-card">
+        <h3>Your Daily Energy Snapshot</h3>
+        <p class="result-description">
+          Based on a <strong>{{ selectedActivityLabel }}</strong> lifestyle.
+        </p>
+
+        <div class="result-values">
+          <div class="value-chip">
+            <span class="label">BMR</span>
+            <span class="number">{{ bmr }}</span>
+            <span class="unit">cal/day</span>
+          </div>
+          <div class="value-chip highlight">
+            <span class="label">TDEE</span>
+            <span class="number">{{ tdee }}</span>
+            <span class="unit">cal/day</span>
+          </div>
+        </div>
+
+        <div class="calorie-guidance">
+          <h4>Suggested daily calorie targets</h4>
+          <ul>
+            <li>
+              <span class="tag deficit">Fat Loss Goal</span>
+              <span class="value">{{ calorieTargets.fatLoss }} cal/day</span>
+              <span class="description">~15% below maintenance</span>
+            </li>
+            <li>
+              <span class="tag maintenance">Maintain Weight</span>
+              <span class="value">{{ calorieTargets.maintenance }} cal/day</span>
+            </li>
+            <li>
+              <span class="tag surplus">Muscle Gain</span>
+              <span class="value">{{ calorieTargets.muscleGain }} cal/day</span>
+              <span class="description">~15% above maintenance</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="result-note">
+          <h4>How to use these numbers</h4>
+          <p>
+            Track your meals and adjust your intake based on how your body responds. Combine your calorie plan with balanced nutrition, regular movement, and enough rest for the best results.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-section">
+      <h3>What is TDEE?</h3>
+      <p>
+        Total Daily Energy Expenditure (TDEE) is the total amount of energy your body uses in a day. It includes your Basal Metabolic Rate (BMR) plus the energy used for activity and digestion.
+      </p>
+
+      <h4>Why it matters</h4>
+      <ul>
+        <li><strong>Set realistic goals:</strong> Use TDEE to determine how many calories you should eat to gain, lose, or maintain weight.</li>
+        <li><strong>Plan smarter:</strong> Align your nutrition with your workout schedule for consistent progress.</li>
+        <li><strong>Stay flexible:</strong> Recalculate every few months or when your routine changes.</li>
+      </ul>
+
+      <div class="tip-box">
+        <h4>Coach Tip</h4>
+        <p>
+          Combine your TDEE result with our personalised diet and workout plans for a complete transformation experience.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="activity-insights">
+    <h3>Activity level overview</h3>
+    <div class="activity-grid">
+      <div class="activity-card" *ngFor="let level of activityLevels">
+        <div class="title-row">
+          <span class="label">{{ level.label }}</span>
+          <span class="factor">{{ level.factor }}x</span>
+        </div>
+        <p>{{ level.description }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+

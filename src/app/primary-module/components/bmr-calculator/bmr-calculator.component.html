@@ -1,7 +1,9 @@
 <div class="bmr-container">
   <div class="calculator-header">
-    <h2>BMR Calculator</h2>
-    <p class="subtitle">Calculate your Basal Metabolic Rate (BMR) to understand your daily calorie needs at rest</p>
+    <h2>Basal Metabolic Rate (BMR) Calculator</h2>
+    <p class="subtitle">
+      Discover the number of calories your body burns at rest. Enter your details to receive a personalised BMR estimate and guidance.
+    </p>
   </div>
 
   <div class="calculator-content">
@@ -10,28 +12,27 @@
         <div class="form-row">
           <div class="form-group">
             <label for="age">Age *</label>
-            <input 
-              type="number" 
-              id="age" 
-              formControlName="age" 
+            <input
+              id="age"
+              type="number"
+              formControlName="age"
               placeholder="Enter your age"
               class="form-control"
               [class.error]="bmrForm.get('age')?.invalid && bmrForm.get('age')?.touched"
-            >
+            />
             <div class="error-message" *ngIf="bmrForm.get('age')?.invalid && bmrForm.get('age')?.touched">
               {{ getErrorMessage('age') }}
             </div>
           </div>
-
           <div class="form-group">
             <label for="gender">Gender *</label>
-            <select 
-              id="gender" 
-              formControlName="gender" 
+            <select
+              id="gender"
+              formControlName="gender"
               class="form-control"
             >
-              <option value="M">Male</option>
-              <option value="F">Female</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
             </select>
           </div>
         </div>
@@ -39,29 +40,28 @@
         <div class="form-row">
           <div class="form-group">
             <label for="height">Height (cm) *</label>
-            <input 
-              type="number" 
-              id="height" 
-              formControlName="height" 
+            <input
+              id="height"
+              type="number"
+              formControlName="height"
               placeholder="Enter height in cm"
               class="form-control"
               [class.error]="bmrForm.get('height')?.invalid && bmrForm.get('height')?.touched"
-            >
+            />
             <div class="error-message" *ngIf="bmrForm.get('height')?.invalid && bmrForm.get('height')?.touched">
               {{ getErrorMessage('height') }}
             </div>
           </div>
-
           <div class="form-group">
             <label for="weight">Weight (kg) *</label>
-            <input 
-              type="number" 
-              id="weight" 
-              formControlName="weight" 
+            <input
+              id="weight"
+              type="number"
+              formControlName="weight"
               placeholder="Enter weight in kg"
               class="form-control"
               [class.error]="bmrForm.get('weight')?.invalid && bmrForm.get('weight')?.touched"
-            >
+            />
             <div class="error-message" *ngIf="bmrForm.get('weight')?.invalid && bmrForm.get('weight')?.touched">
               {{ getErrorMessage('weight') }}
             </div>
@@ -69,50 +69,57 @@
         </div>
 
         <div class="button-group">
-          <button type="submit" class="btn-calculate" [disabled]="bmrForm.invalid">
-            Calculate BMR
-          </button>
-          <button type="button" class="btn-reset" (click)="resetForm()">
-            Reset
-          </button>
+          <button type="submit" class="btn-primary">Calculate BMR</button>
+          <button type="button" class="btn-reset" (click)="resetForm()">Reset</button>
         </div>
       </form>
     </div>
 
     <div class="result-section" *ngIf="showResult && bmrResult !== null">
       <div class="result-card">
-        <h3>Your BMR Result</h3>
-        <div class="bmr-value">
-          <span class="number">{{ bmrResult }}</span>
-          <span class="unit">calories/day</span>
+        <h3>Your Resting Energy</h3>
+
+        <div class="result-values">
+          <div class="value-chip highlight">
+            <span class="label">BMR</span>
+            <span class="number">{{ bmrResult }}</span>
+            <span class="unit">cal/day</span>
+          </div>
         </div>
-        <div class="result-explanation">
+
+        <div class="result-note">
           <h4>What does this mean?</h4>
-          <p>Your Basal Metabolic Rate (BMR) is the number of calories your body burns at rest to maintain basic life functions like breathing, circulation, and cell production.</p>
-          
-          <h4>How to use your BMR:</h4>
-          <ul>
-            <li><strong>Weight Loss:</strong> Consume fewer calories than your BMR + activity level</li>
-            <li><strong>Weight Maintenance:</strong> Consume calories equal to your BMR + activity level</li>
-            <li><strong>Weight Gain:</strong> Consume more calories than your BMR + activity level</li>
-          </ul>
-          
-          <p class="note"><strong>Note:</strong> This calculation uses the Mifflin-St Jeor Equation, which is considered one of the most accurate BMR formulas for healthy adults.</p>
+          <p>
+            Your Basal Metabolic Rate (BMR) represents the calories your body needs for essential functions such as breathing, circulation, and cell production while at complete rest.
+          </p>
+          <p>
+            Use this number as the foundation for your nutrition plan. Adjust for activity to find your Total Daily Energy Expenditure (TDEE) and align your calorie intake with your goals.
+          </p>
         </div>
       </div>
     </div>
 
     <div class="info-section">
-      <h3>About BMR</h3>
-      <p>Basal Metabolic Rate (BMR) represents the minimum number of calories your body needs to function while at complete rest. It accounts for approximately 60-75% of your total daily energy expenditure.</p>
-      
-      <h4>Factors that affect BMR:</h4>
+      <h3>Understanding BMR</h3>
+      <p>
+        BMR accounts for 60–75% of your daily energy expenditure. It is influenced by age, gender, muscle mass, and genetics. Track changes over time as your lifestyle evolves.
+      </p>
+
+      <h4>How to use your BMR</h4>
       <ul>
-        <li><strong>Age:</strong> BMR decreases with age</li>
-        <li><strong>Gender:</strong> Men typically have higher BMR due to more muscle mass</li>
-        <li><strong>Body Composition:</strong> More muscle mass increases BMR</li>
-        <li><strong>Genetics:</strong> Some people naturally have faster or slower metabolisms</li>
+        <li><strong>Fat Loss:</strong> Aim for a modest calorie deficit from your TDEE.</li>
+        <li><strong>Maintenance:</strong> Match your intake to your TDEE to maintain weight and energy.</li>
+        <li><strong>Muscle Gain:</strong> Add a controlled surplus paired with strength training.</li>
       </ul>
+
+      <div class="tip-box">
+        <h4>Coach Tip</h4>
+        <p>
+          Pair your BMR result with our TDEE calculator to build a complete picture of your energy needs.
+        </p>
+      </div>
     </div>
   </div>
 </div>
+
+

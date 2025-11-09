@@ -8,14 +8,17 @@
     </div>
 
     <div class="menu-items">
-      <a routerLink="/bmr-calculator">
+      <a routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        Home
+      </a>
+      <a routerLink="/bmr-calculator" routerLinkActive="active">
         BMR Calculator
+      </a>
+      <a routerLink="/tdee-calculator" routerLinkActive="active">
+        TDEE Calculator
       </a>
       <a (click) ="openWebPage()">
         Blogs
-      </a>
-      <a href="javascript:void(0)" (click)="openCalculator()">
-        Calculator
       </a>
     </div>
 

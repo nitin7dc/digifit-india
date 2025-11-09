@@ -6,21 +6,33 @@
 
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {HomeComponent} from './primary-module/components';
-import { BmrCalculatorComponent } from "./primary-module/components/bmr-calculator/bmr-calculator.component";
+import {
+  HomeComponent,
+  BmrCalculatorComponent,
+  TdeeCalculatorComponent,
+} from './primary-module/components';
 
 const routes: Routes = [
   {
-    path: "home",
+    path: '',
+    redirectTo: 'home',
+    pathMatch: 'full',
+  },
+  {
+    path: 'home',
     component: HomeComponent,
   },
   {
-    path: "bmr-calculator",
+    path: 'bmr-calculator',
     component: BmrCalculatorComponent,
   },
   {
-    path: "**",
-    redirectTo: "home",
+    path: 'tdee-calculator',
+    component: TdeeCalculatorComponent,
+  },
+  {
+    path: '**',
+    redirectTo: 'home',
   },
 ];
 

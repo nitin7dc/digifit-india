@@ -13,16 +13,15 @@ import {
   HeaderComponent,
   FooterComponent,
   HomeComponent,
+  BmrCalculatorComponent,
+  TdeeCalculatorComponent,
 } from './components';
-import {FlexLayoutModule, FlexModule} from '@angular/flex-layout';
-import {MatButtonModule} from '@angular/material/button';
-import {MatMenuModule} from '@angular/material/menu';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
 import { ReviewsComponent } from './components/reviews/reviews.component';
-import { CalculatorDialogComponent } from './calculator-dialog/calculator-dialog.component';
-import { BmrCalculatorComponent } from "./components/bmr-calculator/bmr-calculator.component";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { MatDialogModule, MatDialogRef } from "@angular/material/dialog";
-import { MatSelectModule } from "@angular/material/select";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
 
 /****************************************************************************************
  * Import Modules
@@ -38,14 +37,8 @@ import { MatSelectModule } from "@angular/material/select";
     FooterComponent,
     HomeComponent,
     ReviewsComponent,
-    CalculatorDialogComponent,
     BmrCalculatorComponent,
-  ],
-  providers: [
-    {
-      provide: MatDialogRef,
-      useValue: {},
-    },
+    TdeeCalculatorComponent,
   ],
   exports: [HeaderComponent, FooterComponent],
   imports: [
@@ -59,7 +52,6 @@ import { MatSelectModule } from "@angular/material/select";
     MatCardModule,
     MatIconModule,
     FormsModule,
-    MatDialogModule,
   ],
 })
 export class PrimaryModuleModule {}

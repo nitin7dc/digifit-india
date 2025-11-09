@@ -1,69 +1,107 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-bmr-calculator',
   templateUrl: './bmr-calculator.component.html',
-  styleUrls: ['./bmr-calculator.component.scss']
+  styleUrls: ['./bmr-calculator.component.scss'],
 })
-export class BmrCalculatorComponent implements OnInit {
+export class BmrCalculatorComponent {
   bmrForm: FormGroup;
-  bmrResult: number | null = null;
   showResult = false;
+  bmrResult: number | null = null;
 
   constructor(private fb: FormBuilder) {
     this.bmrForm = this.fb.group({
-      age: ['', [Validators.required, Validators.min(1), Validators.max(120)]],
-      gender: ['M', Validators.required],
-      height: ['', [Validators.required, Validators.min(50), Validators.max(300)]],
-      weight: ['', [Validators.required, Validators.min(20), Validators.max(500)]]
+      age: [
+        null,
+        [Validators.required, Validators.min(1), Validators.max(120)],
+      ],
+      gender: ['male', Validators.required],
+      height: [
+        null,
+        [Validators.required, Validators.min(50), Validators.max(300)],
+      ],
+      weight: [
+        null,
+        [Validators.required, Validators.min(20), Validators.max(500)],
+      ],
     });
   }
 
-  ngOnInit(): void {}
-
   calculateBMR(): void {
-    if (this.bmrForm.valid) {
-      const { age, gender, height, weight } = this.bmrForm.value;
-      
-      let bmr: number;
-      if (gender === 'M') {
-        bmr = (10 * weight) + (6.25 * height) - (5 * age) + 5;
-      } else {
-        bmr = (10 * weight) + (6.25 * height) - (5 * age) - 161;
-      }
-      
-      this.bmrResult = Math.round(bmr);
-      this.showResult = true;
-    } else {
+    if (this.bmrForm.invalid) {
       this.markFormGroupTouched();
+      this.showResult = false;
+      return;
     }
+
+    const { age, gender, height, weight } = this.bmrForm.value;
+    const ageValue = Number(age);
+    const heightValue = Number(height);
+    const weightValue = Number(weight);
+    const normalizedGender = (gender as string).toLowerCase();
+
+    let bmr =
+      10 * weightValue + 6.25 * heightValue - 5 * ageValue;
+
+    if (normalizedGender === 'male') {
+      bmr += 5;
+    } else {
+      bmr -= 161;
+    }
+
+    this.bmrResult = Math.round(bmr);
+    this.showResult = true;
   }
 
   resetForm(): void {
-    this.bmrForm.reset({ gender: 'M' });
-    this.bmrResult = null;
+    this.bmrForm.reset({
+      age: null,
+      gender: 'male',
+      height: null,
+      weight: null,
+    });
     this.showResult = false;
+    this.bmrResult = null;
+  }
+
+  getErrorMessage(controlName: string): string {
+    const control = this.bmrForm.get(controlName);
+
+    if (!control) {
+      return '';
+    }
+
+    if (control.hasError('required')) {
+      return `${this.toTitleCase(controlName)} is required`;
+    }
+
+    if (control.hasError('min')) {
+      const minValue = control.getError('min')?.min;
+      return `${this.toTitleCase(controlName)} must be at least ${minValue}`;
+    }
+
+    if (control.hasError('max')) {
+      const maxValue = control.getError('max')?.max;
+      return `${this.toTitleCase(controlName)} must be at most ${maxValue}`;
+    }
+
+    return '';
   }
 
   private markFormGroupTouched(): void {
-    Object.keys(this.bmrForm.controls).forEach(key => {
+    Object.keys(this.bmrForm.controls).forEach((key) => {
       const control = this.bmrForm.get(key);
       control?.markAsTouched();
     });
   }
 
-  getErrorMessage(controlName: string): string {
-    const control = this.bmrForm.get(controlName);
-    if (control?.hasError('required')) {
-      return `${controlName.charAt(0).toUpperCase() + controlName.slice(1)} is required`;
-    }
-    if (control?.hasError('min')) {
-      return `${controlName.charAt(0).toUpperCase() + controlName.slice(1)} must be at least ${control.errors?.['min']}`;
-    }
-    if (control?.hasError('max')) {
-      return `${controlName.charAt(0).toUpperCase() + controlName.slice(1)} must be at most ${control.errors?.['max']}`;
-    }
-    return '';
+  private toTitleCase(value: string): string {
+    return value
+      .replace(/([A-Z])/g, ' $1')
+      .replace(/^./, (match) => match.toUpperCase());
   }
 }
+
+
